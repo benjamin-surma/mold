@@ -43,8 +43,8 @@ end
 function __mold_install
     # Install bundle functions
     set checkout_path $argv[1]
-    for installable in $checkout_path/fish/functions/* $checkout_path/fish/completions/*
-        set installation_path ~/.config/(dirname $installable)
+    for installable in $checkout_path/**/functions/* $checkout_path/**/completions/*
+        set installation_path ~/.config/fish/(basename (dirname $installable))
         if not test -d $installation_path
             mkdir -p $installation_path
         end
@@ -95,11 +95,8 @@ end
 function __mold_load
     # Inject autoload scripts
     set checkout_path $argv[1]
-    set autoload_path $checkout_path/fish/autoload
-    if test -d $autoload_path
-        for file in $autoload_path/*.fish
-            source $file
-        end
+    for file in $checkout_path/**/autoload/*.fish
+        source $file
     end
 end
 
@@ -140,12 +137,9 @@ function __mold_theme
         __mold_bundle $git_url
         set bundle_name (__mold_get_bundle_name_from_git_url $git_url)
     end
-    set themes_path (__mold_get_checkout_path_from_bundle_name $bundle_name)/fish/themes
-    if test -d $themes_path
-        set installation_path ~/.config/fish/functions
-        for file in $themes_path/*.fish
-            ln -fs $file $installation_path/fish_prompt.fish
-        end
+    set themes_path (__mold_get_checkout_path_from_bundle_name $bundle_name)/**/themes
+    for file in $themes_path/*.fish
+        ln -fs $file ~/.config/fish/functions/fish_prompt.fish
     end
 end
 

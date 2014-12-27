@@ -28,7 +28,7 @@ Plugins should follow the below folder hierarchy:
     |-- functions
     |-- completions
 
-The `[root]` folder does not need to be the top folder of the checked out folder. Mold will try to infer the folder structure by using `find` and using the first result.
+The `[root]` directory does not need to be the top folder of the checked out repository. Mold will attempt to infer the folder structure.
 
 #### autoload
 Files in the `autoload` folder are automatically sourced on shell startup.
