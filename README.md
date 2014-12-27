@@ -13,7 +13,7 @@ Themes are handled by `mold theme`.
 
 For instance, to launch ssh-agent at startup and load your identities if needed via the `ssh-agent_mold` plugin, add the below line to your `config.fish` file:
 
-    mold bundle https://github.com/benjamin-surma/ssh-agent_mold.git
+    mold bundle https://github.com/benjamin-surma/ssh-agent_fish.git
 
 A list of currently installed bundles can be consulted with `mold list`.
 
