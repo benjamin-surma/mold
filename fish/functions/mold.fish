@@ -4,14 +4,7 @@ function __mold_initial_setup
         pushd (dirname (status -f))/../..
         set mold_path (pwd)
         popd
-        for folder in functions completions
-            set src $mold_path/$folder
-            set dest ~/.config/fish/$folder
-            if not test -d $dest
-                mkdir -p $dest
-            end
-            ln -fs $src/mold.fish $dest/mold.fish
-        end
+        __mold_install $mold_path
         set -U __mold_path $mold_path
     end
 end
