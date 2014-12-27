@@ -56,7 +56,7 @@ function __mold_fixup
     for file in ~/.config/fish/functions/*
         if test -L $file
             if __mold_is_symlink_broken $file
-                echo "#### Delete: $file"
+                echo "#### Unlink: $file"
                 rm $file
             end
         end
@@ -178,21 +178,27 @@ end
 
 function mold
     set sub_command $argv[1]
-    switch $sub_command
-        case bundle
-            __mold_bundle $argv[2]
-        case theme
-            __mold_theme $argv[2]
-        case update
-            __mold_update
-        case cleanup
-            __mold_cleanup
-        case help
-            __mold_help
-        case list
-            __mold_list
-        case ls
-            __mold_list
+    if test -z "$sub_command"
+        __mold_help
+    else
+        switch $sub_command
+            case bundle
+                __mold_bundle $argv[2]
+            case theme
+                __mold_theme $argv[2]
+            case update
+                __mold_update
+            case cleanup
+                __mold_cleanup
+            case help
+                __mold_help
+            case list
+                __mold_list
+            case ls
+                __mold_list
+            case '*'
+                __mold_help
+        end
     end
 end
 
