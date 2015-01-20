@@ -36,5 +36,5 @@ Files in the `autoload` folder are automatically sourced on shell startup.
 #### functions
 Files in the `functions` folder are symlinked to `~/.config/fish/functions/`
 
-### completions
+#### completions
 Files in the `completions` folder are symlinked to `~/.config/fish/completions/`
