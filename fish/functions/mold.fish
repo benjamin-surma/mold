@@ -1,10 +1,14 @@
 function __mold_initial_setup
     if not set -q __mold_path
         echo "## mold: Initial setup"
-        pushd (dirname (status -f))
-        pushd (dirname (readlink (status -f)))/../..
+        set mold_bin (status -f)
+        pushd (dirname $mold_bin)
+        while test -L $mold_bin
+            set mold_bin (readlink $mold_bin)
+            cd (dirname $mold_bin)
+        end
+        cd ../..
         set mold_path (pwd)
-        popd
         popd
         __mold_install $mold_path
         set -U __mold_path $mold_path
